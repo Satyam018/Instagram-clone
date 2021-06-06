@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".registeractivity">
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.385">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginHorizontal="55dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/insta" />
+        <EditText
+            android:id="@+id/fullnames"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="45dp"
+
+            android:background="@drawable/edittextbg"
+            android:hint="Full Name"
+            android:padding="6dp"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+        <EditText
+            android:id="@+id/emails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="15dp"
+
+            android:background="@drawable/edittextbg"
+            android:hint="Email"
+            android:padding="6dp"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+    <EditText
+        android:id="@+id/usernames"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="15dp"
+
+        android:background="@drawable/edittextbg"
+        android:hint="Username"
+        android:padding="6dp"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/passwords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edittextbg"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="6dp"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/register"
+        android:background="@drawable/buttonbg"
+        android:text="Sign up."
+        android:textAllCaps="false"
+        android:textAlignment="center" />
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
