@@ -22,7 +22,23 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         bottomNavigationView=(BottomNavigationView)findViewById(R.id.bottomnav);
         frameLayout=(FrameLayout)findViewById(R.id.frame1);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame1,new Homefragemnt()).commit();
+
+        Bundle intent=getIntent().getExtras();
+        if (intent!=null){
+            String publisher=intent.getString("publisherid");
+            SharedPreferences.Editor editor=getSharedPreferences("PREFS",MODE_PRIVATE).edit();
+            editor.putString("profileid",publisher);
+            editor.apply();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame1,new profileFragment()).commit();
+
+        }else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame1,new Homefragemnt()).commit();
+        }
+
+
+
+
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
