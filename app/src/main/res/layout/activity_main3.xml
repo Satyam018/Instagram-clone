@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity3">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:background="?android:attr/windowBackground">
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/commentshorecycler"
+        android:layout_below="@+id/toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+      >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/userimgcommsection"
+
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="4dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter a comment..."
+            android:id="@+id/entercomment"
+            android:textColor="@color/black"
+            android:background="@android:color/transparent"
+            android:textSize="15dp"
+            android:layout_toRightOf="@+id/userimgcommsection"
+            android:layout_toLeftOf="@+id/postcomment"
+            android:layout_marginRight="50dp"
+            android:paddingVertical="8dp"
+            android:textStyle="italic"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:id="@+id/postcomment"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="2dp"
+            android:layout_alignParentEnd="true"
+            android:text="Post"/>
+
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
