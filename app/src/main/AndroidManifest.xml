@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Instagramclone">
-        <activity android:name=".MainActivity3"></activity>
+        <activity android:name=".Editprofile"></activity>
+        <activity android:name=".MainActivity3" />
         <activity android:name=".Postactivity" />
         <activity android:name=".registeractivity" />
         <activity android:name=".MainActivity2" />

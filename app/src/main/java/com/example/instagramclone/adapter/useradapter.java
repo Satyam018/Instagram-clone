@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.auth.User;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class useradapter extends RecyclerView.Adapter<useradapter.Viewholder> {
@@ -82,6 +83,7 @@ public class useradapter extends RecyclerView.Adapter<useradapter.Viewholder> {
                             setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("follow").child(user.getId()).child("followers").child(firebaseUser.getUid()).
                             setValue(true);
+                    addnotification(user.getId());
                 }else {
                     FirebaseDatabase.getInstance().getReference().child("follow").child(firebaseUser.getUid()).child("following").
                             child(user.getId()).removeValue();
@@ -129,6 +131,17 @@ public class useradapter extends RecyclerView.Adapter<useradapter.Viewholder> {
             }
 
         });
+    }
+    private void addnotification(String userid){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("notifications").child(userid);
+        HashMap<String,Object>hashMap=new HashMap<>();
+        hashMap.put("userid",firebaseUser.getUid());
+        hashMap.put("text","started following you");
+        hashMap.put("postid","");
+        hashMap.put("ispost",false);
+        reference.push().setValue(hashMap);
+
+
     }
 }
 

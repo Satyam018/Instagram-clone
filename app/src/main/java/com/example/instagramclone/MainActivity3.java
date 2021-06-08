@@ -127,5 +127,14 @@ public class MainActivity3 extends AppCompatActivity {
             }
         });
     }
+    private void addnotifictaion(){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("notifications").child(publisher);
+        HashMap<String,Object>hashMap=new HashMap<>();
+        hashMap.put("userid",FirebaseAuth.getInstance().getCurrentUser().getUid());
+        hashMap.put("text","commented on the post");
+        hashMap.put("postid",postid);
+        hashMap.put("ispost",true);
+        reference.push().setValue(hashMap);
+    }
 
 }

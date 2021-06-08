@@ -2,6 +2,7 @@ package com.example.instagramclone.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.instagramclone.MainActivity3;
 import com.example.instagramclone.R;
 import com.example.instagramclone.model.Post;
+import com.example.instagramclone.postdetailFragment;
+import com.example.instagramclone.profileFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class postadapter extends RecyclerView.Adapter<postadapter.Viewholder> {
@@ -68,6 +73,7 @@ public class postadapter extends RecyclerView.Adapter<postadapter.Viewholder> {
                     if (holder.like.getTag().equals("like")){
                         FirebaseDatabase.getInstance().getReference().child("likes").child(temp.getPostid())
                                 .child(firebaseUser.getUid()).setValue(true);
+                        addnotification(temp.getPublisher(),temp.getPostid());
                         islike(temp.getPostid(),holder.like);
                         nrliskes(holder.likes,temp.getPostid());
                     }else{
@@ -97,6 +103,42 @@ public class postadapter extends RecyclerView.Adapter<postadapter.Viewholder> {
                     }
                 }
             });
+            holder.imageprofile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreferences.Editor editor=context.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                    editor.putString("profileid",temp.getPublisher());
+                    editor.apply();
+                    ( (FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame1,new profileFragment()).commit();
+                }
+            });
+        holder.username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor=context.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                editor.putString("profileid",temp.getPublisher());
+                editor.apply();
+                ( (FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame1,new profileFragment()).commit();
+            }
+        });
+        holder.publisher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor=context.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                editor.putString("profileid",temp.getPublisher());
+                editor.apply();
+                ( (FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame1,new profileFragment()).commit();
+            }
+        });
+        holder.postimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor=context.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                editor.putString("postid",temp.getPostid());
+                editor.apply();
+                ( (FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame1,new postdetailFragment()).commit();
+            }
+        });
     }
 
     @Override
@@ -216,6 +258,16 @@ public class postadapter extends RecyclerView.Adapter<postadapter.Viewholder> {
 
             }
         });
+    }
+    private void addnotification(String userid,String postid){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("notifications").child(userid);
+        HashMap<String,Object>hashMap=new HashMap<>();
+        hashMap.put("userid",firebaseUser.getUid());
+        hashMap.put("text","liked your post");
+        hashMap.put("postid",postid);
+        hashMap.put("ispost",true);
+        reference.push().setValue(hashMap);
+
     }
 }
 

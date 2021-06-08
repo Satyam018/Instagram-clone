@@ -1,6 +1,7 @@
 package com.example.instagramclone;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -137,7 +138,7 @@ public class profileFragment extends Fragment {
             public void onClick(View v) {
                 String btn=editprofile.getText().toString();
                 if (btn.equals("Edit Profile")){
-                    //go to edit profile
+                    startActivity(new Intent(getContext(),Editprofile.class));
                 }else if (btn.equals("follow")) {
 
                     FirebaseDatabase.getInstance().getReference().child("follow").child(firebaseUser.getUid()).child("following").child(profileid).
@@ -168,8 +169,11 @@ public class profileFragment extends Fragment {
                 String usernames=snapshot.child("username").getValue().toString();
                 String imgurl=snapshot.child("imgurl").getValue().toString();
                 String fullnames=snapshot.child("fullname").getValue().toString();
+                String bios=snapshot.child("bio").getValue().toString();
                 fullname.setText(fullnames);
                 username.setText(usernames);
+                bio.setText(bios);
+
                 Glide.with(getContext()).load(imgurl).into(profileimg);
 
             }
