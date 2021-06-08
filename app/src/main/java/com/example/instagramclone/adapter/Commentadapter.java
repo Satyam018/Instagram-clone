@@ -49,7 +49,7 @@ public class Commentadapter extends RecyclerView.Adapter<Commentadapter.Viewhold
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent(context, MainActivity2.class);
-                    intent.putExtra("publihserid",temp.getPublihser());
+                    intent.putExtra("publisherid",temp.getPublihser());
                     context.startActivity(intent);
                 }
             });
@@ -57,7 +57,7 @@ public class Commentadapter extends RecyclerView.Adapter<Commentadapter.Viewhold
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, MainActivity2.class);
-                intent.putExtra("publihserid",temp.getPublihser());
+                intent.putExtra("publisherid",temp.getPublihser());
                 context.startActivity(intent);
             }
         });

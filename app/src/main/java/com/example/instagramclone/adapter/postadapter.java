@@ -58,7 +58,9 @@ public class postadapter extends RecyclerView.Adapter<postadapter.Viewholder> {
             publisherinfo(holder.imageprofile,holder.username,holder.publisher,temp.getPublisher());
             islike(temp.getPostid(),holder.like);
             nrliskes(holder.likes,temp.getPostid());
-                getcomment(temp.getPostid(),holder.comments);
+            getcomment(temp.getPostid(),holder.comments);
+            isSaved(temp.getPostid(),holder.save);
+
 
             holder.like.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -83,6 +85,16 @@ public class postadapter extends RecyclerView.Adapter<postadapter.Viewholder> {
                     intent.putExtra("postid",temp.getPostid());
                     intent.putExtra("publisherid",temp.getPublisher());
                     context.startActivity(intent);
+                }
+            });
+            holder.save.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (holder.save.getTag().equals("save")){
+                        FirebaseDatabase.getInstance().getReference("saves").child(firebaseUser.getUid()).child(temp.getPostid()).setValue(true);
+                    }else {
+                        FirebaseDatabase.getInstance().getReference("saves").child(firebaseUser.getUid()).child(temp.getPostid()).removeValue();
+                    }
                 }
             });
     }
@@ -183,6 +195,27 @@ public class postadapter extends RecyclerView.Adapter<postadapter.Viewholder> {
             }
         });
 
+    }
+    private void isSaved(String postid, ImageView imageView){
+        FirebaseUser firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("saves").child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child(postid).exists()){
+                imageView.setImageResource(R.drawable.ic_baseline_bookmark_24);
+                imageView.setTag("saved");
+                }else {
+                    imageView.setImageResource(R.drawable.ic_baseline_bookmark_border_24);
+                    imageView.setTag("save");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
 
